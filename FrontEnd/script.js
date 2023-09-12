@@ -16,6 +16,7 @@ async function getCategories() {
 document.body.onload = function () {
     createProjects();
     createFilters();
+    buttonFilters.addEventListener("click", buttonClicked);
 }
 
 async function createProjects() {
@@ -43,10 +44,19 @@ async function createFilters () {
     for (let i=0; i<nbCategories; i++) { 
         // On crée des boutons qui s'appuient sur les catégories que j'ai récupérées du Back-end //
         const buttonFilters = document.createElement("button");
-        buttonFilters.classList.add('button__filters');
+        buttonFilters.classList.add("button__filters");
         buttonFilters.innerHTML=categories[i].name;
         const containerButtons = document.querySelector(".buttons__container");
         containerButtons.appendChild(buttonFilters);
     }
 }
 
+
+/*
+const buttonFilters = document.querySelector(".button__filters");
+
+function buttonClicked () {
+    buttonFilters.classList.add(".button--selected");
+    console.log("j'ai cliqué")
+    
+}*/
