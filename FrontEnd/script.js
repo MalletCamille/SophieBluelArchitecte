@@ -13,15 +13,19 @@ async function createProjects() {
     // Récupération des éléments de la page //
     const gallery = document.querySelector(".gallery");
     // Création dynamique des éléments de la page //
-    const figure = document.createElement("figure");
-    const image = document.createElement("img");
-    const figcaption = document.createElement("figcaption");
     const works = await getWorks();
-    image.setAttribute ("src",works[0].imageUrl);
-    image.setAttribute ("alt", works[0].title);
-    figcaption.innerHTML=works[0].title;
-    figure.appendChild(image);
-    figure.appendChild(figcaption);
-    gallery.appendChild(figure);
+    let nbProjects = works.length // On compte le nombre d'éléments dans le tableau works //
+    for (let i=0; i<nbProjects; i++) { 
+        const figure = document.createElement("figure");
+        const image = document.createElement("img");
+        const figcaption = document.createElement("figcaption");
+        image.setAttribute ("src",works[i].imageUrl);
+        image.setAttribute ("alt", works[i].title);
+        figcaption.innerHTML=works[i].title;
+        figure.appendChild(image);
+        figure.appendChild(figcaption);
+        gallery.appendChild(figure);
+    } 
 }
+
 
