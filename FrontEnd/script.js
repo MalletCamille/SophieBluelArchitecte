@@ -16,7 +16,7 @@ async function getCategories() {
 document.body.onload = function () {
     createProjects();
     createFilters();
-    buttonFilters.addEventListener("click", buttonClicked);
+    buttonAll.addEventListener("click", buttonClicked);
 }
 
 async function createProjects() {
@@ -48,15 +48,16 @@ async function createFilters () {
         buttonFilters.innerHTML=categories[i].name;
         const containerButtons = document.querySelector(".buttons__container");
         containerButtons.appendChild(buttonFilters);
+        buttonFilters.addEventListener("click", buttonClicked);
     }
 }
 
 
-/*
-const buttonFilters = document.querySelector(".button__filters");
 
-function buttonClicked () {
-    buttonFilters.classList.add(".button--selected");
-    console.log("j'ai cliqué")
+const buttonAll = document.querySelector(".button__filters");
+
+ function buttonClicked (event) {
+    console.log(event.target.innerText)
+     console.log("j'ai cliqué")
     
-}*/
+}
