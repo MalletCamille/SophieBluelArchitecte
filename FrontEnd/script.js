@@ -1,14 +1,17 @@
+let works = [];
+let categories = [];
+
 // On récupère les projets depuis le Back-end //
 async function getWorks() {
     const response = await fetch("http://localhost:5678/api/works");
-    const works = await response.json();
+    works = await response.json();
     return works;
 }
 
 // On récupère les catégories de projet depuis le Back-end //
 async function getCategories() {
     const response = await fetch("http://localhost:5678/api/categories");
-    const categories = await response.json();
+    categories = await response.json();
     return categories;
 }
 
@@ -57,14 +60,33 @@ async function createFilters () {
 const buttonAll = document.querySelector(".button__filters");
 
  function buttonClicked (event) {
-    console.log(event.target.innerText)
-     console.log("j'ai cliqué")
+    // On retire la sélection actuelle //
+	const buttonSelected = document.querySelector(".button--selected");
+	buttonSelected.classList.remove('button--selected');
+	// On sélectionne la nouvelle position //
+	const updateButtonSelected = event.target;
+	updateButtonSelected.classList.add("button--selected");
 
-     // On retire la sélection actuelle //
-			const buttonSelected = document.querySelector(".button--selected");
-			buttonSelected.classList.remove('button--selected');
-			// On sélectionne la nouvelle position //
-			const updateButtonSelected = event.target;
-			updateButtonSelected.classList.add("button--selected");
-    
+    // On supprime de l'affichage tous les projets //
+    const gallery = document.querySelector(".gallery");
+    gallery.innerHTML="";
+    // On réaffiche les projets qui correspondent à la catégorie du bouton filtre qui a été cliqué //
+    let worksFiltered =  works.filter(function(work) {
+        if (event.target.innerText === "Tous") {
+            return true;
+        }
+        return work.category.name == event.target.innerText;
+    });
+    let nbProjects = worksFiltered.length // On compte le nombre d'éléments dans le tableau worksFiltered //
+    for (let i=0; i<nbProjects; i++) { 
+        const figure = document.createElement("figure");
+        const image = document.createElement("img");
+        const figcaption = document.createElement("figcaption");
+        image.setAttribute ("src",worksFiltered[i].imageUrl);
+        image.setAttribute ("alt", worksFiltered[i].title);
+        figcaption.innerHTML=worksFiltered[i].title;
+        figure.appendChild(image);
+        figure.appendChild(figcaption);
+        gallery.appendChild(figure);
+    }  
 }
