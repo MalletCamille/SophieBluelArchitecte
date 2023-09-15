@@ -23,22 +23,9 @@ document.body.onload = function () {
 }
 
 async function createProjects() {
-    // Récupération des éléments de la page //
-    const gallery = document.querySelector(".gallery");
     // Création dynamique des éléments de la page //
     const works = await getWorks();
-    let nbProjects = works.length // On compte le nombre d'éléments dans le tableau works //
-    for (let i=0; i<nbProjects; i++) { 
-        const figure = document.createElement("figure");
-        const image = document.createElement("img");
-        const figcaption = document.createElement("figcaption");
-        image.setAttribute ("src",works[i].imageUrl);
-        image.setAttribute ("alt", works[i].title);
-        figcaption.innerHTML=works[i].title;
-        figure.appendChild(image);
-        figure.appendChild(figcaption);
-        gallery.appendChild(figure);
-    } 
+    createProjectsCards(works);
 }
 
 async function createFilters () {
@@ -77,6 +64,13 @@ const buttonAll = document.querySelector(".button__filters");
         }
         return work.category.name == event.target.innerText;
     });
+
+    createProjectsCards(worksFiltered);
+}  
+
+
+function createProjectsCards(worksFiltered) {
+    const gallery = document.querySelector(".gallery");
     let nbProjects = worksFiltered.length // On compte le nombre d'éléments dans le tableau worksFiltered //
     for (let i=0; i<nbProjects; i++) { 
         const figure = document.createElement("figure");
