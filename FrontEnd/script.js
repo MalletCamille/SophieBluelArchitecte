@@ -59,5 +59,12 @@ const buttonAll = document.querySelector(".button__filters");
  function buttonClicked (event) {
     console.log(event.target.innerText)
      console.log("j'ai cliqué")
+
+     // On retire la sélection actuelle //
+			const buttonSelected = document.querySelector(".button--selected");
+			buttonSelected.classList.remove('button--selected');
+			// On sélectionne la nouvelle position //
+			const updateButtonSelected = event.target;
+			updateButtonSelected.classList.add("button--selected");
     
 }
