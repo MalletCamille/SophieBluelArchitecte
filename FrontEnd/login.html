@@ -24,15 +24,17 @@
     </header>
     <div class="container__login">
         <h2>Log In</h2>
-        <p class="title__email">E-mail</p>
-        <input type="text" name="email__user" size="17">
-        <p class="title__password">Mot de passe</p>
-        <input type="text" name="password__user" size="17">
-        <div class="container__login-button">
-            <a class="login-button">Se connecter</a>
-        </div>
+        <form>
+            <label class="title__email" for="email">E-mail</label>
+            <input type="text" id="email" name="email">
+            <label class="title__password" for="password">Mot de passe</label>
+            <input type="text" name="password">
+            <div class="container__login-button">
+                <a class="login-button">Se connecter</a>
+            </div>
+        </form>
         <p class="password__forgotten">Mot de passe oublié</p>
-</div>    
+    </div>    
     <footer class="login__footer">
         <nav>
             <ul>

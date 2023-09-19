@@ -282,6 +282,10 @@ footer nav {
 	border: none;
 }
 
+.container__login-button {
+	align-self: center;
+}
+
 .login-button {
 	width: 179px;
 	height: 36px;
@@ -303,16 +307,6 @@ footer nav {
 	cursor: pointer;
 }
 
-.title__email {
-	position: relative;
-	right : 171px;
-}
-
-.title__password {
-	position: relative;
-	right: 147px;
-}
-
 .login__footer {
 	background: white;
 	height: 60px;
@@ -320,4 +314,13 @@ footer nav {
 	position: absolute;
     bottom: 0;
     right: 0;
+}
+
+.container__login form {
+display: flex;
+flex-direction: column;
+}
+
+.container__login form label {
+	margin-bottom: 7px;
 }
