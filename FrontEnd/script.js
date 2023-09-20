@@ -84,3 +84,6 @@ function createProjectsCards(worksFiltered) {
         gallery.appendChild(figure);
     }  
 }
+
+
+
