@@ -3,19 +3,17 @@
 async function postUsersLogin() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    console.log('Nom d\'utilisateur :', email);
-    console.log('Mot de passe :', password);
     const response = await fetch("http://localhost:5678/api/users/login", {
         method: 'POST',
         headers:{
             'Content-Type' :'application/json'
         },
-        body: {
-            "email": email,
-            "password": password,
-        }
+        body: JSON.stringify({
+            'email': email,
+            'password': password,
+        })
     })
-    console.log(await response);
+    return await response.json();
 }
 
 
@@ -24,10 +22,8 @@ async function postUsersLogin() {
 document.body.onload = function () {
 
     let loginForm = document.querySelector(".container__login form")    
-    loginForm.addEventListener("submit", function (event) {
+    loginForm.addEventListener("submit", async function (event) {
         event.preventDefault ()
-        console.log("le formulaire est envoyé")
-        console.log(event)
         postUsersLogin();
     })
 }
