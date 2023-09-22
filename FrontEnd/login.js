@@ -14,19 +14,21 @@ async function postUsersLogin() {
                 'password': password,
             })
         })
-        console.log('gnallô ?');
-        console.log(response);
-        if (response.status !== 200) {
+        if (await response.status !== 200) {
             throw new Error("Le login ou le mot de passe est incorrect");  
-        } 
-        return await response.json();
-        
+        }
+        const responseJson = await response.json();
+        // On stocke le token d'identification dans le cas où l'authentification est validée //
+        sessionStorage.setItem('token', responseJson.token); 
     }
     catch (erreur) {
+        // Code à exécuter en cas d'erreur    
         alert (erreur.message)
-        // Code à exécuter en cas d'erreur
     }
-}    
+}   
+
+// Pour récupérer le token d'authentification //
+//const token = sessionStorage.getItem('token');//
 
 
 
@@ -36,6 +38,6 @@ document.body.onload = function () {
     let loginForm = document.querySelector(".container__login form")    
     loginForm.addEventListener("submit", async function (event) {
         event.preventDefault ()
-        postUsersLogin();
+        postUsersLogin()
     })
 }
