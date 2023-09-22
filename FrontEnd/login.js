@@ -3,18 +3,30 @@
 async function postUsersLogin() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const response = await fetch("http://localhost:5678/api/users/login", {
-        method: 'POST',
-        headers:{
-            'Content-Type' :'application/json'
-        },
-        body: JSON.stringify({
-            'email': email,
-            'password': password,
+    try { 
+        const response = await fetch("http://localhost:5678/api/users/login", {
+            method: 'POST',
+            headers:{
+                'Content-Type' :'application/json'
+            },
+            body: JSON.stringify({
+                'email': email,
+                'password': password,
+            })
         })
-    })
-    return await response.json();
-}
+        console.log('gnallô ?');
+        console.log(response);
+        if (response.status !== 200) {
+            throw new Error("Le login ou le mot de passe est incorrect");  
+        } 
+        return await response.json();
+        
+    }
+    catch (erreur) {
+        alert (erreur.message)
+        // Code à exécuter en cas d'erreur
+    }
+}    
 
 
 
