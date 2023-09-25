@@ -15,20 +15,41 @@ async function getCategories() {
     return categories;
 }
 
+function logout() {
+    const modifyButton = document.querySelector(".modify_button");
+    const containerButtons = document.querySelector(".buttons__container");
+    const blackBand = document.querySelector(".black_band")
+    const buttonFilters = document.createElement("button");
+    const loginNav = document.querySelector("#nav-login");
+    sessionStorage.removeItem('token');
+    loginNav.innerText="login";
+    blackBand.classList.add("display_none");
+    buttonFilters.classList.remove("display_none");
+    modifyButton.classList.add("display_none");
+    loginNav.setAttribute("href","index.html")
+}
+
 // On appelle les fonctions au chargement du body dans le DOM //
 document.body.onload = function () {
     createProjects();
     createFilters();
     buttonAll.addEventListener("click", buttonClicked);
-    const token = sessionStorage.getItem('token');
     const loginNav = document.querySelector("#nav-login");
+    const token = sessionStorage.getItem('token')
     if (token) {
-    loginNav.innerText="logout";
-    const containerButtons = document.querySelector(".buttons__container");
-    containerButtons.classList.add("display_none");
-    
-
-}
+        const modifyButton = document.querySelector(".modify_button");
+        const containerButtons = document.querySelector(".buttons__container");
+        const blackBand = document.querySelector(".black_band")
+        const buttonFilters = document.createElement("button");
+        const loginNav = document.querySelector("#nav-login");
+        loginNav.innerText="logout";
+        containerButtons.classList.add("display_none");
+        loginNav.addEventListener("click", logout);
+        loginNav.innerText="logout";
+        blackBand.classList.remove("display_none");
+        buttonFilters.classList.add("display_none");
+        modifyButton.classList.remove("display_none");
+    }
 }
 
 async function createProjects() {

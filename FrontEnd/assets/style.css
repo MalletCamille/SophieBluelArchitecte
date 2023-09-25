@@ -349,9 +349,6 @@ flex-direction: column;
 	padding-bottom: 20px;
 }
 
-.display_none {
-	display:none;
-}
 
 .modify_button {
 	display: flex;
@@ -381,4 +378,8 @@ flex-direction: column;
 .content {
 	margin: auto;
 	max-width: 1140px;
+}
+
+.display_none {
+	display:none;
 }
