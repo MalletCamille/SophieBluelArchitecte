@@ -20,10 +20,11 @@ async function postUsersLogin() {
         const responseJson = await response.json();
         // On stocke le token d'identification dans le cas où l'authentification est validée //
         sessionStorage.setItem('token', responseJson.token); 
+        window.location.assign("index.html");
     }
     catch (erreur) {
         // Code à exécuter en cas d'erreur    
-        alert (erreur.message)
+        alert (erreur.message) 
     }
 }   
 
@@ -41,3 +42,4 @@ document.body.onload = function () {
         postUsersLogin()
     })
 }
+

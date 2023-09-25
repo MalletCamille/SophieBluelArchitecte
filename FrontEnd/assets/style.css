@@ -64,8 +64,6 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -128,7 +126,6 @@ li:hover {
 }
 #introduction img {
 	display: block;
-	margin: auto;
 	width: 80%;
 }
 
@@ -144,7 +141,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 
 .button__filters {
@@ -326,4 +322,63 @@ flex-direction: column;
 
 .container__login form label {
 	margin-bottom: 7px;
+}
+
+.black_band {
+	background-color: black;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 11px;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: "Work Sans";
+	width: 100%;
+	margin: 0px;
+	position: sticky;
+	top: 0px;
+}
+
+.white-icon {
+	color: white;
+}
+
+.black_band span {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.display_none {
+	display:none;
+}
+
+.modify_button {
+	display: flex;
+	gap: 11px;
+	font-family: "work sans";
+	font-size: 14px;
+	color: black;
+	font-weight: 400;
+	align-items: center;
+	border: none;
+	outline: none;
+	background: none;
+}
+
+.modify_button:hover {
+	cursor: pointer;
+}
+
+.container_projects-title {
+	display: flex;
+	flex-direction: row;
+	gap: 31px;
+	margin-bottom: 1em;
+	justify-content: center;
+}
+
+.content {
+	margin: auto;
+	max-width: 1140px;
 }

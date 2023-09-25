@@ -20,6 +20,15 @@ document.body.onload = function () {
     createProjects();
     createFilters();
     buttonAll.addEventListener("click", buttonClicked);
+    const token = sessionStorage.getItem('token');
+    const loginNav = document.querySelector("#nav-login");
+    if (token) {
+    loginNav.innerText="logout";
+    const containerButtons = document.querySelector(".buttons__container");
+    containerButtons.classList.add("display_none");
+    
+
+}
 }
 
 async function createProjects() {
@@ -84,8 +93,6 @@ function createProjectsCards(worksFiltered) {
         gallery.appendChild(figure);
     }  
 }
-
-
 
 
 
