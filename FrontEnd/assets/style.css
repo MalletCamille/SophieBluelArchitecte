@@ -391,7 +391,8 @@ flex-direction: column;
 	align-items: center;
 	height: 100vh;
 	width: 100vw;
-	position: absolute;
+	position: fixed;
+	background: rgba(0, 0, 0, .5);
 }
 
 .modal-step1 {
@@ -402,16 +403,33 @@ flex-direction: column;
 	z-index: 3;
 	flex-direction: column;
 	position: fixed;
+	justify-content: space-between;
+	align-items: center;
 }
 
-.modal-step1_cross {
-	position: relative;
-	right: 0;
-	top: 0;
+.modal-step1_header {
+	display: flex;
+	align-self: flex-end;
+}
+
+.modal-step1_content {
+	flex-grow: 4;
 }
 
 .modal-step1_title {
 	color: black;
+}
+
+.modal-step1_footer {
+	margin-bottom: 45px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.modal-steap1_line {
+	margin-bottom: 38px;
+	width: 420px;
 }
 
 .modal-step1_button {
