@@ -47,6 +47,7 @@ nav ul li:hover {
 body {
 	line-height: 1;
 }
+
 ol, ul {
 	list-style: none;
 }
@@ -382,4 +383,51 @@ flex-direction: column;
 
 .display_none {
 	display:none;
+}
+
+.container_modal-step1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+}
+
+.modal-step1 {
+	display: flex;
+	height: 688px;
+	width: 630px;
+	background-color: white;
+	z-index: 3;
+	flex-direction: column;
+	position: fixed;
+}
+
+.modal-step1_cross {
+	position: relative;
+	right: 0;
+	top: 0;
+}
+
+.modal-step1_title {
+	color: black;
+}
+
+.modal-step1_button {
+	cursor: pointer;
+	border: 1px solid #1D6154;
+	border-radius : 60px;
+	outline: none;
+	text-align: center;
+	font-family: Syne;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	background: none;
+	padding : 9px 28px 9px 30px;
+	color: white;
+	background: #1D6154;
+	width: 237px;
 }
