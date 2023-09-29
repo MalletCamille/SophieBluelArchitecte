@@ -16,16 +16,8 @@ async function getCategories() {
 }
 
 function logout() {
-    const modifyButton = document.querySelector(".modify_button");
-    const containerButtons = document.querySelector(".buttons__container");
-    const blackBand = document.querySelector(".black_band")
-    const buttonFilters = document.createElement("button");
     const loginNav = document.querySelector("#nav-login");
     sessionStorage.removeItem('token');
-    loginNav.innerText="login";
-    blackBand.classList.add("display_none");
-    buttonFilters.classList.remove("display_none");
-    modifyButton.classList.add("display_none");
     loginNav.setAttribute("href","index.html")
 }
 

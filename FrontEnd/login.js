@@ -14,17 +14,19 @@ async function postUsersLogin() {
                 'password': password,
             })
         })
-        if (await response.status !== 200) {
+        if (response.status !== 200) {
             throw new Error("Le login ou le mot de passe est incorrect");  
         }
-        const responseJson = await response.json();
+        const responseJson = response.json();
         // On stocke le token d'identification dans le cas où l'authentification est validée //
         sessionStorage.setItem('token', responseJson.token); 
         window.location.assign("index.html");
     }
     catch (erreur) {
         // Code à exécuter en cas d'erreur    
-        alert (erreur.message) 
+        const errorMessage = document.querySelector(".error_message");
+        errorMessage.innerHTML=erreur.message;
+        errorMessage.classList.remove("display_none");
     }
 }   
 

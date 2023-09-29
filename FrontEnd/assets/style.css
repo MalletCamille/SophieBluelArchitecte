@@ -624,6 +624,16 @@ flex-direction: column;
 	line-height: normal;
 }
 
+.error_message {
+	color: red;
+	margin-bottom: 40px;
+	padding: 10px 20px;
+	font-size : 15px;
+	background: rgba(255, 0, 0, .1);
+	font-weight: bold;
+    border-radius: 12px;
+}
+
 .display_none {
 	display:none;
 }
