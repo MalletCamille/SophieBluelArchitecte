@@ -15,6 +15,11 @@ async function getCategories() {
     return categories;
 }
 
+async function deleteWork(workId) {
+    const response = await fetch("http://localhost:5678/api/works/" + workId, {method: 'DELETE'});
+    return works;
+}    
+
 function logout() {
     const loginNav = document.querySelector("#nav-login");
     sessionStorage.removeItem('token');
@@ -49,7 +54,7 @@ document.body.onload = function () {
         crossButtonStep1.addEventListener("click", closeModal);
         crossButtonStep2.addEventListener("click", closeModa2);
         addImgButton.addEventListener("click", openModalStep2);
-        arrowStep2.addEventListener("click", returnModalStep1)
+        arrowStep2.addEventListener("click", returnModalStep1);
     }
 }
 
@@ -144,7 +149,8 @@ function manageWorks() {
         image.classList.add("gallery-editor_img");
         containerImg.classList.add("container_imgstep1");
         trashCan.classList.add("trashcan", "fa-regular", "fa-trash-can");
-
+        trashCan.addEventListener("click", trashcanClicked);
+        trashCan.setAttribute("workID", works[i].id);
     }
 }
 
@@ -171,6 +177,12 @@ function returnModalStep1() {
     modalStep1.classList.remove("display_none");
     modalStep2.classList.add("display_none");
 } 
+
+async function trashcanClicked(event) {
+    const workId = event.target.getAttribute('workId');
+    deleteWork(workId);
+    getWorks();
+}
 
 
 

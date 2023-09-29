@@ -414,6 +414,10 @@ flex-direction: column;
     border-radius: 3px;
 }
 
+.trashcan:hover {
+	cursor: pointer;
+}
+
 .modal-step1_header {
 	display: flex;
 	align-self: flex-end;
