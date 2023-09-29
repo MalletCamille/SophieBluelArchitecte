@@ -29,12 +29,15 @@ document.body.onload = function () {
     const loginNav = document.querySelector("#nav-login");
     const token = sessionStorage.getItem('token')
     const editorModify = document.querySelector(".editor_modify")
+    const crossButtonStep1 = document.querySelector(".modal-step1_cross")
+    const crossButtonStep2 = document.querySelector(".modal-step2_cross")
+    const addImgButton = document.querySelector(".modal-step1_button")
+    const arrowStep2 = document.querySelector(".modal-step2_arrow")
     if (token) {
         const modifyButton = document.querySelector(".modify_button");
         const containerButtons = document.querySelector(".buttons__container");
         const blackBand = document.querySelector(".black_band")
         const buttonFilters = document.createElement("button");
-        const loginNav = document.querySelector("#nav-login");
         loginNav.innerText="logout";
         containerButtons.classList.add("display_none");
         loginNav.addEventListener("click", logout);
@@ -42,9 +45,19 @@ document.body.onload = function () {
         blackBand.classList.remove("display_none");
         buttonFilters.classList.add("display_none");
         modifyButton.classList.remove("display_none");
-        editorModify.addEventListener("click", openModalstep1)
+        editorModify.addEventListener("click", openModalstep1);
+        crossButtonStep1.addEventListener("click", closeModal);
+        crossButtonStep2.addEventListener("click", closeModa2);
+        addImgButton.addEventListener("click", openModalStep2);
+        arrowStep2.addEventListener("click", returnModalStep1)
     }
 }
+
+
+
+      
+    
+
 
 async function createProjects() {
     // Création dynamique des éléments de la page //
@@ -126,6 +139,29 @@ function manageWorks() {
     }
 }
 
+function closeModal() {
+    const modalStep1 = document.querySelector(".container_modal-step1");
+    modalStep1.classList.add("display_none");
+}
+
+function closeModa2() {
+    const modalStep2 = document.querySelector(".container_modal-step2");
+    modalStep2.classList.add("display_none");
+}
+
+function openModalStep2() {
+    const modalStep1 = document.querySelector(".container_modal-step1");
+    const modalStep2 = document.querySelector(".container_modal-step2");
+    modalStep1.classList.add("display_none");
+    modalStep2.classList.remove("display_none");
+}
+
+function returnModalStep1() {
+    const modalStep1 = document.querySelector(".container_modal-step1");
+    const modalStep2 = document.querySelector(".container_modal-step2");
+    modalStep1.classList.remove("display_none");
+    modalStep2.classList.add("display_none");
+} 
 
 
 
