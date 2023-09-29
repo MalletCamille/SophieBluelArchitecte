@@ -125,7 +125,9 @@ function createProjectsCards(worksFiltered) {
 function openModalstep1() {
     const modalStep1 = document.querySelector(".container_modal-step1")
     modalStep1.classList.remove("display_none");
-    manageWorks();
+    if (!document.querySelector(".gallery-editor_img")) {
+        manageWorks(); 
+    }
 }    
 
 function manageWorks() {
