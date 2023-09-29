@@ -403,6 +403,17 @@ flex-direction: column;
 	align-items: center;
 }
 
+.trashcan {
+	background-color: black;
+	color: white;
+	padding: 4px;
+    font-size: 10px;
+	position: absolute;
+    top: 6px;
+    right: 6px;
+    border-radius: 3px;
+}
+
 .modal-step1_header {
 	display: flex;
 	align-self: flex-end;
@@ -434,6 +445,11 @@ flex-direction: column;
 	padding-left: 105px;
 	padding-right: 105px;
 	padding-top: 46px;
+}
+
+.container_imgstep1 {
+	position: relative;
+	width: 18%;
 }
 
 .modal-step1_content {
@@ -660,7 +676,7 @@ flex-direction: column;
 }
 
 .gallery-editor_img {
-	width: 18%;
+	width: 100%;
 	height: 104px;
 }
 

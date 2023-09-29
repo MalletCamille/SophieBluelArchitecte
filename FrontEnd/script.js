@@ -135,9 +135,16 @@ function manageWorks() {
     let nbProjects = works.length // On compte le nombre d'éléments dans le tableau works //
     for (let i=0; i<nbProjects; i++) { 
         const image = document.createElement("img");
-        step1Gallery.appendChild(image);
+        const containerImg = document.createElement("div");
+        const trashCan = document.createElement("i");
+        step1Gallery.appendChild(containerImg);
+        containerImg.appendChild(trashCan);
+        containerImg.appendChild(image);
         image.setAttribute ("src",works[i].imageUrl);
         image.classList.add("gallery-editor_img");
+        containerImg.classList.add("container_imgstep1");
+        trashCan.classList.add("trashcan", "fa-regular", "fa-trash-can");
+
     }
 }
 
