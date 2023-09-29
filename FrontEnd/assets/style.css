@@ -423,8 +423,21 @@ flex-direction: column;
 	margin-top: 10px;
 }
 
+.modal-step1_gallery {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 22px 10px;
+	padding-left: 105px;
+	padding-right: 105px;
+	padding-top: 46px;
+}
+
 .modal-step1_content {
 	flex-grow: 4;
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+	align-items: center;
 }
 
 .modal-step1_footer {
@@ -632,6 +645,11 @@ flex-direction: column;
 	background: rgba(255, 0, 0, .1);
 	font-weight: bold;
     border-radius: 12px;
+}
+
+.gallery-editor_img {
+	width: 18%;
+	height: 104px;
 }
 
 .display_none {

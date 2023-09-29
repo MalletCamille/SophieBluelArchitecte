@@ -28,6 +28,7 @@ document.body.onload = function () {
     buttonAll.addEventListener("click", buttonClicked);
     const loginNav = document.querySelector("#nav-login");
     const token = sessionStorage.getItem('token')
+    const editorModify = document.querySelector(".editor_modify")
     if (token) {
         const modifyButton = document.querySelector(".modify_button");
         const containerButtons = document.querySelector(".buttons__container");
@@ -41,6 +42,7 @@ document.body.onload = function () {
         blackBand.classList.remove("display_none");
         buttonFilters.classList.add("display_none");
         modifyButton.classList.remove("display_none");
+        editorModify.addEventListener("click", openModalstep1)
     }
 }
 
@@ -106,6 +108,25 @@ function createProjectsCards(worksFiltered) {
         gallery.appendChild(figure);
     }  
 }
+
+function openModalstep1() {
+    const modalStep1 = document.querySelector(".container_modal-step1")
+    modalStep1.classList.remove("display_none");
+    manageWorks();
+}    
+
+function manageWorks() {
+    const step1Gallery = document.querySelector(".modal-step1_gallery");
+    let nbProjects = works.length // On compte le nombre d'éléments dans le tableau works //
+    for (let i=0; i<nbProjects; i++) { 
+        const image = document.createElement("img");
+        step1Gallery.appendChild(image);
+        image.setAttribute ("src",works[i].imageUrl);
+        image.classList.add("gallery-editor_img");
+    }
+}
+
+
 
 
 
