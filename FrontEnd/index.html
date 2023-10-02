@@ -43,9 +43,13 @@
 					<span class="modal-step2_title">Ajout photo</span>
 					<form action="#" method="post">
 						<div class="container_file">
-							<i class="file_icon fa-regular fa-image"></i>
-							<button class="button_file">+ Ajouter photo</button>
-							<span class="info_file">jpg, png : 4mo max</span>
+							<div class="content_file">
+								<input type="file" id="img_project" name="img_project" accept="image/png, image/jpeg">
+								<label for="fileInput"></label>
+								<i class="file_icon fa-regular fa-image"></i>
+								<div class="button_file">+ Ajouter photo</div>
+								<span class="info_file">jpg, png : 4mo max</span>
+							</div>	
 						</div>
 						<div class="form_file">
 							<label class="label_style" for="title_work">Titre</label>
@@ -54,7 +58,7 @@
 							<select class="select_style" type="text" id="category_work" name="category_work">
 								<option value=""></option>
 								<option value="items">Objets</option>
-								<option value="appartments">Objets</option>
+								<option value="appartments">Appartements</option>
 								<option value="hotels and restaurants">Hôtels & restaurants</option>
 							</select>	
 						</div>

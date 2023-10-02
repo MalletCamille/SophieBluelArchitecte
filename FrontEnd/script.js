@@ -48,6 +48,7 @@ document.body.onload = function () {
         const containerButtons = document.querySelector(".buttons__container");
         const blackBand = document.querySelector(".black_band")
         const buttonFilters = document.createElement("button");
+        const addFile = document.querySelector(".content_file");
         loginNav.innerText="logout";
         containerButtons.classList.add("display_none");
         loginNav.addEventListener("click", logout);
@@ -60,6 +61,7 @@ document.body.onload = function () {
         crossButtonStep2.addEventListener("click", closeModa2);
         addImgButton.addEventListener("click", openModalStep2);
         arrowStep2.addEventListener("click", returnModalStep1);
+        addFile.addEventListener("click", addFileProject);
     }
 }
 
@@ -181,8 +183,16 @@ async function trashcanClicked(event) {
     const workId = event.target.getAttribute('workId');
     deleteWork(workId);
     getWorks();
+    // On supprime de l'affichage tous les projets //
+    const galleryStep1 = document.querySelector(".modal-step1_gallery");
+    galleryStep1.innerHTML="";
+    manageWorks();
 }
 
+function addFileProject() {
+    const buttonFile = document.querySelector("#img_project");
+    buttonFile.click();
+}
 
 
 
