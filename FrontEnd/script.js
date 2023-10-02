@@ -16,8 +16,13 @@ async function getCategories() {
 }
 
 async function deleteWork(workId) {
-    const response = await fetch("http://localhost:5678/api/works/" + workId, {method: 'DELETE'});
-    return works;
+    const token = sessionStorage.getItem('token')
+    const response = await fetch("http://localhost:5678/api/works/" + workId, {
+        method: 'DELETE',
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
 }    
 
 function logout() {
@@ -57,12 +62,6 @@ document.body.onload = function () {
         arrowStep2.addEventListener("click", returnModalStep1);
     }
 }
-
-
-
-      
-    
-
 
 async function createProjects() {
     // Création dynamique des éléments de la page //

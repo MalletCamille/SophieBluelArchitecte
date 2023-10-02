@@ -17,9 +17,11 @@ async function postUsersLogin() {
         if (response.status !== 200) {
             throw new Error("Le login ou le mot de passe est incorrect");  
         }
-        const responseJson = response.json();
+        const responseJson = await response.json();
         // On stocke le token d'identification dans le cas où l'authentification est validée //
-        sessionStorage.setItem('token', responseJson.token); 
+        sessionStorage.setItem('token', responseJson.token);
+        console.log(responseJson);
+        console.log(responseJson.token) 
         window.location.assign("index.html");
     }
     catch (erreur) {
