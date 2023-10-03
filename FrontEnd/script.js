@@ -201,14 +201,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.getElementById("submit_Project");
     const fieldsInput = document.querySelectorAll("#formAddProjects input");
     const fieldsSelect = document.querySelectorAll("#formAddProjects select");
+    const contentFile = document.querySelector(".content_file")
     formulaire.addEventListener("input", function() {
         let completedFields = true;
         fieldsInput.forEach(function(input) {
             console.log(input.id, input.value);
             if (input.id === "img_project" && input.value) {
                 let imgFileProject = document.querySelector(".img_file_project");
-                const file = imgFileProject.files[0];
-                imgFileProject.setAttribute("src", URL.createObjectURL(file));
+                imgFileProject.src = URL.createObjectURL(input.files[0]);
+                contentFile.classList.add("display_none");
                 imgFileProject.classList.remove("display_none");
             }    
             if (input.value.trim() ==="") {
