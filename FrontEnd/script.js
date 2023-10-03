@@ -23,7 +23,26 @@ async function deleteWork(workId) {
             "Authorization": `Bearer ${token}`
         }
     });
-}    
+}
+
+async function sendNewWork() {
+    const response = await fetch("http://localhost:5678/api/works/", {
+        method: 'POST',
+        headers: {
+            'Content-Type' :'application/json'
+        },
+        body: JSON.stringify({
+            image : "string",
+            title : "string",
+            category : "integer",          
+        })
+    })
+    if (response.status !== 201) {
+        console.log(response.status);
+    }
+    
+}
+
 
 function logout() {
     const loginNav = document.querySelector("#nav-login");
