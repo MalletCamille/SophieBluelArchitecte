@@ -41,10 +41,11 @@
 				</div>
 				<div class="modal-step2_content">	
 					<span class="modal-step2_title">Ajout photo</span>
-					<form action="#" method="post">
+					<form id="formAddProjects" action="#" method="post">
 						<div class="container_file">
 							<div class="content_file">
 								<input type="file" id="img_project" name="img_project" accept="image/png, image/jpeg">
+								<img class="img_file_project display_none" src="" alt="">
 								<label for="fileInput"></label>
 								<i class="file_icon fa-regular fa-image"></i>
 								<div class="button_file">+ Ajouter photo</div>
@@ -66,7 +67,7 @@
 				</div>
 				<div class="modal-step2_footer">
 					<hr class="modal-steap2_line"/>	
-					<button class="modal-step2_button">Valider</button>
+					<button type="submit" id="submit_Project" disabled class="modal-step2_button button_grey">Valider</button>
 				</div>	
 			</div>
 		</div>	

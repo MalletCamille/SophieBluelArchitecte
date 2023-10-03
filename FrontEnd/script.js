@@ -49,6 +49,7 @@ document.body.onload = function () {
         const blackBand = document.querySelector(".black_band")
         const buttonFilters = document.createElement("button");
         const addFile = document.querySelector(".content_file");
+        const submitButton = document.querySelector("#submit_Project")
         loginNav.innerText="logout";
         containerButtons.classList.add("display_none");
         loginNav.addEventListener("click", logout);
@@ -62,6 +63,7 @@ document.body.onload = function () {
         addImgButton.addEventListener("click", openModalStep2);
         arrowStep2.addEventListener("click", returnModalStep1);
         addFile.addEventListener("click", addFileProject);
+        submitButton.addEventListener("click", submitProject);
     }
 }
 
@@ -194,5 +196,42 @@ function addFileProject() {
     buttonFile.click();
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const formulaire = document.getElementById("formAddProjects");
+    const submitButton = document.getElementById("submit_Project");
+    const fieldsInput = document.querySelectorAll("#formAddProjects input");
+    const fieldsSelect = document.querySelectorAll("#formAddProjects select");
+    formulaire.addEventListener("input", function() {
+        let completedFields = true;
+        fieldsInput.forEach(function(input) {
+            console.log(input.id, input.value);
+            if (input.id === "img_project" && input.value) {
+                let imgFileProject = document.querySelector(".img_file_project");
+                const file = imgFileProject.files[0];
+                imgFileProject.setAttribute("src", URL.createObjectURL(file));
+                imgFileProject.classList.remove("display_none");
+            }    
+            if (input.value.trim() ==="") {
+                completedFields = false;
+            }    
+        });
+        fieldsSelect.forEach(function(select) {
+            console.log(select.id, select.value);
+            if (select.value ==="") {
+                completedFields = false;
+            }
+        });        
+        if (completedFields) {
+            submitButton.removeAttribute("disabled");
+            submitButton.classList.remove("button_grey");
+        } else {
+            submitButton.setAttribute("disabled", "true");
+        }
+    });
+});        
 
+
+function submitProject() {
+    console.log("le bouton a été cliqué");
+}
 
