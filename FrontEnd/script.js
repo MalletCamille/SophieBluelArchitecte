@@ -25,22 +25,21 @@ async function deleteWork(workId) {
     });
 }
 
-async function sendNewWork() {
+async function sendNewWork(works) {
+    const formData = new FormData();
+    formData.append("title", works.titleProject);     
+    formData.append("category", works.categoryProject);     
+    formData.append("image", works.imgProject);
     const response = await fetch("http://localhost:5678/api/works/", {
         method: 'POST',
         headers: {
             'Content-Type' :'application/json'
         },
-        body: JSON.stringify({
-            image : "string",
-            title : "string",
-            category : "integer",          
-        })
+        body: formData       
     })
     if (response.status !== 201) {
         console.log(response.status);
-    }
-    
+    }   
 }
 
 
@@ -83,6 +82,7 @@ document.body.onload = function () {
         arrowStep2.addEventListener("click", returnModalStep1);
         addFile.addEventListener("click", addFileProject);
         submitButton.addEventListener("click", submitProject);
+        integrationCategoryModalStep2();
     }
 }
 
@@ -253,5 +253,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function submitProject() {
     console.log("le bouton a été cliqué");
+    const imgProject = document.querySelector("#img_project");
+    const titleProject = document.querySelector("#title-work");
+    const categoryProject = document.querySelector("#category_work");
+    const works =  {
+        imgProject : imgProject.files[0],
+        titleProject : titleProject.value,
+        categoryProject : categoryProject.value
+    }    
+    sendNewWork(works);
 }
 
+async function integrationCategoryModalStep2 () {
+    const categories = await getCategories();
+    console.log(categories);
+    const selectCategory = document.querySelector("#category_work")
+    let nbCategories = categories.length // On compte le nombre de catégories //
+    for (let i=0; i<nbCategories; i++) {    
+        const option = document.createElement("option");
+        selectCategory.appendChild(option);
+        option.setAttribute("value", categories[i].id);
+        option.innerHTML = categories[i].name;
+    }
+}    
