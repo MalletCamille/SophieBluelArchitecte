@@ -1,6 +1,3 @@
-let works = [];
-let categories = [];
-
 // On récupère les projets depuis le Back-end //
 async function getWorks() {
     const response = await fetch("http://localhost:5678/api/works");
@@ -23,17 +20,19 @@ async function deleteWork(workId) {
             "Authorization": `Bearer ${token}`
         }
     });
+    
 }
 
 async function sendNewWork(works) {
     const formData = new FormData();
+    const token = sessionStorage.getItem('token');
     formData.append("title", works.titleProject);     
     formData.append("category", works.categoryProject);     
     formData.append("image", works.imgProject);
     const response = await fetch("http://localhost:5678/api/works/", {
         method: 'POST',
         headers: {
-            'Content-Type' :'application/json'
+            "Authorization": `Bearer ${token}`
         },
         body: formData       
     })
@@ -76,8 +75,8 @@ document.body.onload = function () {
         buttonFilters.classList.add("display_none");
         modifyButton.classList.remove("display_none");
         editorModify.addEventListener("click", openModalstep1);
-        crossButtonStep1.addEventListener("click", closeModal);
-        crossButtonStep2.addEventListener("click", closeModa2);
+        crossButtonStep1.addEventListener("click", closeModalStep1);
+        crossButtonStep2.addEventListener("click", closeModalStep2);
         addImgButton.addEventListener("click", openModalStep2);
         arrowStep2.addEventListener("click", returnModalStep1);
         addFile.addEventListener("click", addFileProject);
@@ -157,7 +156,8 @@ function openModalstep1() {
     }
 }    
 
-function manageWorks() {
+async function manageWorks() {
+    const works = await getWorks();
     const step1Gallery = document.querySelector(".modal-step1_gallery");
     let nbProjects = works.length // On compte le nombre d'éléments dans le tableau works //
     for (let i=0; i<nbProjects; i++) { 
@@ -176,12 +176,12 @@ function manageWorks() {
     }
 }
 
-function closeModal() {
+function closeModalStep1() {
     const modalStep1 = document.querySelector(".container_modal-step1");
     modalStep1.classList.add("display_none");
 }
 
-function closeModa2() {
+function closeModalStep2() {
     const modalStep2 = document.querySelector(".container_modal-step2");
     modalStep2.classList.add("display_none");
 }
@@ -203,7 +203,6 @@ function returnModalStep1() {
 async function trashcanClicked(event) {
     const workId = event.target.getAttribute('workId');
     deleteWork(workId);
-    getWorks();
     // On supprime de l'affichage tous les projets //
     const galleryStep1 = document.querySelector(".modal-step1_gallery");
     galleryStep1.innerHTML="";
