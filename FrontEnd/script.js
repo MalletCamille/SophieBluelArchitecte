@@ -256,6 +256,9 @@ async function submitProject() {
     const imgProject = document.querySelector("#img_project");
     const titleProject = document.querySelector("#title-work");
     const categoryProject = document.querySelector("#category_work");
+    const form = document.querySelector("#formAddProjects");
+    const contentFile = document.querySelector(".content_file")
+    let imgFileProject = document.querySelector(".img_file_project");
     const works =  {
         imgProject : imgProject.files[0],
         titleProject : titleProject.value,
@@ -264,6 +267,9 @@ async function submitProject() {
     await sendNewWork(works);
     closeModalStep2();
     createProjects();
+    form.reset();
+    contentFile.classList.remove("display_none");
+    imgFileProject.classList.add("display_none");
 }
 
 async function integrationCategoryModalStep2 () {
