@@ -134,6 +134,7 @@ const buttonAll = document.querySelector(".button__filters");
 
 function createProjectsCards(worksFiltered) {
     const gallery = document.querySelector(".gallery");
+    gallery.innerHTML = "";
     let nbProjects = worksFiltered.length // On compte le nombre d'éléments dans le tableau worksFiltered //
     for (let i=0; i<nbProjects; i++) { 
         const figure = document.createElement("figure");
@@ -250,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });        
 
 
-function submitProject() {
+async function submitProject() {
     console.log("le bouton a été cliqué");
     const imgProject = document.querySelector("#img_project");
     const titleProject = document.querySelector("#title-work");
@@ -260,7 +261,9 @@ function submitProject() {
         titleProject : titleProject.value,
         categoryProject : categoryProject.value
     }    
-    sendNewWork(works);
+    await sendNewWork(works);
+    closeModalStep2();
+    createProjects();
 }
 
 async function integrationCategoryModalStep2 () {
