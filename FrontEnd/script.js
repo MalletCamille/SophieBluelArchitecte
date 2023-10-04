@@ -152,14 +152,14 @@ function createProjectsCards(worksFiltered) {
 function openModalstep1() {
     const modalStep1 = document.querySelector(".container_modal-step1")
     modalStep1.classList.remove("display_none");
-    if (!document.querySelector(".gallery-editor_img")) {
-        manageWorks(); 
-    }
+    manageWorks(); 
+
 }    
 
 async function manageWorks() {
     const works = await getWorks();
     const step1Gallery = document.querySelector(".modal-step1_gallery");
+    step1Gallery.innerHTML = "";
     let nbProjects = works.length // On compte le nombre d'éléments dans le tableau works //
     for (let i=0; i<nbProjects; i++) { 
         const image = document.createElement("img");
@@ -208,6 +208,7 @@ async function trashcanClicked(event) {
     const galleryStep1 = document.querySelector(".modal-step1_gallery");
     galleryStep1.innerHTML="";
     manageWorks();
+    createProjects();
 }
 
 function addFileProject() {
@@ -258,6 +259,7 @@ async function submitProject() {
     const categoryProject = document.querySelector("#category_work");
     const form = document.querySelector("#formAddProjects");
     const contentFile = document.querySelector(".content_file")
+    const submitButton = document.getElementById("submit_Project");
     let imgFileProject = document.querySelector(".img_file_project");
     const works =  {
         imgProject : imgProject.files[0],
@@ -270,6 +272,8 @@ async function submitProject() {
     form.reset();
     contentFile.classList.remove("display_none");
     imgFileProject.classList.add("display_none");
+    submitButton.setAttribute("disabled", "");
+    submitButton.classList.add("button_grey");
 }
 
 async function integrationCategoryModalStep2 () {

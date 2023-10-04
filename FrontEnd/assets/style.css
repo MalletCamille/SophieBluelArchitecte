@@ -671,6 +671,10 @@ flex-direction: column;
 	border: none;
 }
 
+.button_grey:hover {
+	cursor: initial;
+}
+
 .form_file {
 	display: flex;
 	flex-direction: column;
