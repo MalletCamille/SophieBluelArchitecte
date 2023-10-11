@@ -69,7 +69,6 @@ document.body.onload = function () {
         const submitButton = document.querySelector("#submit_Project")
         loginNav.innerText="logout";
         containerButtons.classList.add("display_none");
-        loginNav.innerText="logout";
         blackBand.classList.remove("display_none");
         buttonFilters.classList.add("display_none");
         modifyButton.classList.remove("display_none");
@@ -121,15 +120,12 @@ const buttonAll = document.querySelector(".button__filters");
 	const updateButtonSelected = event.target;
 	updateButtonSelected.classList.add("button--selected");
 
-    // On supprime de l'affichage tous les projets //
-    const gallery = document.querySelector(".gallery");
-    gallery.innerHTML="";
     // On réaffiche les projets qui correspondent à la catégorie du bouton filtre qui a été cliqué //
     let worksFiltered =  works.filter(function(work) {
         if (event.target.innerText === "Tous") {
             return true;
         }
-        return work.category.name == event.target.innerText;
+        return work.category.name === event.target.innerText;
     });
 
     createProjectsCards(worksFiltered);
@@ -138,7 +134,7 @@ const buttonAll = document.querySelector(".button__filters");
 // On affiche les projets en fonction du filtre qui a été cliqué //
 async function createProjectsCards(worksFiltered) {
     const gallery = document.querySelector(".gallery");
-    let nbProjects = await worksFiltered.length // On compte le nombre d'éléments dans le tableau worksFiltered //
+    let nbProjects = worksFiltered.length // On compte le nombre d'éléments dans le tableau worksFiltered //
     gallery.innerHTML = "";
     for (let i=0; i<nbProjects; i++) { 
         const figure = document.createElement("figure");
@@ -215,7 +211,7 @@ function returnModalStep1() {
 async function trashcanClicked(event) {
     const workId = event.target.getAttribute('workId');
     const galleryStep1 = document.querySelector(".modal-step1_gallery");
-    deleteWork(workId);
+    await deleteWork(workId);
     // On supprime de l'affichage tous les projets //
     galleryStep1.innerHTML="";
     manageWorks();
