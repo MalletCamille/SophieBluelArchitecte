@@ -49,7 +49,8 @@ function logout() {
 }
 
 // On appelle les fonctions au chargement du body dans le DOM //
-document.body.onload = function () {
+document.body.onload = async function () {
+    await getCategories();
     createProjects();
     createFilters();
     const loginNav = document.querySelector("#nav-login");
@@ -93,7 +94,6 @@ async function createProjects() {
 
 // Cette fonction sert a créer les boutons filtres au chargement de la page index //
 async function createFilters () {
-    await getCategories();
     let nbCategories = categories.length // On compte le nombre d'éléments dans le tableau categories //
     for (let i=0; i<nbCategories; i++) { 
         // On crée des boutons qui s'appuient sur les catégories que j'ai récupérées du Back-end //
@@ -284,7 +284,6 @@ async function submitProject() {
 
 // Cette fonction permet de récupérer dynamiquement les catégories pour les intégrer à la liste déroulante dans le formulaire de la modalStep2 //
 async function integrationCategoryModalStep2 () {
-    await getCategories();
     const selectCategory = document.querySelector("#category_work")
     let nbCategories = categories.length // On compte le nombre de catégories //
     for (let i=0; i<nbCategories; i++) {    
