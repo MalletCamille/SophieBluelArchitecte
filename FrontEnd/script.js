@@ -1,6 +1,14 @@
 let works = [];
 let categories = [];
-
+let loginNav;
+const token = sessionStorage.getItem('token');
+let containerButtons;
+let submitButtonmodalStep2;
+let modalStep1;
+let modalStep2;
+let formulaire;
+let contentFile;
+let imgFileProject; 
 
 // On récupère les projets depuis le Back-end //
 async function getWorks() {
@@ -16,7 +24,6 @@ async function getCategories() {
 
 // Cette fonction donne les instructions au Back lorsqu'une corbeille a été cliquée dans la modalStep2 //
 async function deleteWork(workId) {
-    const token = sessionStorage.getItem('token')
     await fetch("http://localhost:5678/api/works/" + workId, {
         method: 'DELETE',
         headers: {
@@ -28,7 +35,6 @@ async function deleteWork(workId) {
 
 async function sendNewWork(works) {
     const formData = new FormData();
-    const token = sessionStorage.getItem('token');
     formData.append("title", works.titleProject);     
     formData.append("category", works.categoryProject);     
     formData.append("image", works.imgProject);
@@ -43,18 +49,23 @@ async function sendNewWork(works) {
 
 // Cette fonction donne les instructions au click sur logout en mode édition //
 function logout() {
-    const loginNav = document.querySelector("#nav-login");
     sessionStorage.removeItem('token');
     loginNav.setAttribute("href","index.html")
 }
 
 // On appelle les fonctions au chargement du body dans le DOM //
 document.body.onload = async function () {
+    containerButtons = document.querySelector(".buttons__container");
+    loginNav = document.querySelector("#nav-login");
+    modalStep1 = document.querySelector(".container_modal-step1");
+    modalStep2 = document.querySelector(".container_modal-step2");
+    formulaire = document.getElementById("formAddProjects");
+    contentFile = document.querySelector(".content_file");
+    imgFileProject = document.querySelector(".img_file_project");
     await getCategories();
     createProjects();
     createFilters();
-    const loginNav = document.querySelector("#nav-login");
-    const token = sessionStorage.getItem('token')
+    const buttonAll = document.querySelector(".button__filters");
     const editorModify = document.querySelector(".editor_modify")
     const crossButtonStep1 = document.querySelector(".modal-step1_cross")
     const crossButtonStep2 = document.querySelector(".modal-step2_cross")
@@ -63,15 +74,12 @@ document.body.onload = async function () {
     buttonAll.addEventListener("click", buttonClicked);
     if (token) {
         const modifyButton = document.querySelector(".modify_button");
-        const containerButtons = document.querySelector(".buttons__container");
         const blackBand = document.querySelector(".black_band")
-        const buttonFilters = document.createElement("button");
         const addFile = document.querySelector(".content_file");
-        const submitButton = document.querySelector("#submit_Project")
+        submitButtonmodalStep2 = document.querySelector("#submit_Project")
         loginNav.innerText="logout";
         containerButtons.classList.add("display_none");
         blackBand.classList.remove("display_none");
-        buttonFilters.classList.add("display_none");
         modifyButton.classList.remove("display_none");
         loginNav.addEventListener("click", logout);
         editorModify.addEventListener("click", openModalstep1);
@@ -80,7 +88,7 @@ document.body.onload = async function () {
         addImgButton.addEventListener("click", openModalStep2);
         arrowStep2.addEventListener("click", returnModalStep1);
         addFile.addEventListener("click", addFileProject);
-        submitButton.addEventListener("click", submitProject);
+        submitButtonmodalStep2.addEventListener("click", submitProject);
         integrationCategoryModalStep2();
         manageFormModalStep2();  
     }
@@ -98,17 +106,12 @@ async function createFilters () {
     for (let i=0; i<nbCategories; i++) { 
         // On crée des boutons qui s'appuient sur les catégories que j'ai récupérées du Back-end //
         const buttonFilters = document.createElement("button");
-        const containerButtons = document.querySelector(".buttons__container");
         buttonFilters.classList.add("button__filters");
         buttonFilters.innerHTML=categories[i].name;
         containerButtons.appendChild(buttonFilters);
         buttonFilters.addEventListener("click", buttonClicked);
     }
 }
-
-
-
-const buttonAll = document.querySelector(".button__filters");
 
 
 // On donne les instructions au click sur un bouton filtre //
@@ -151,7 +154,6 @@ async function createProjectsCards(worksFiltered) {
 
 // Cette fonction donne les instructions au click sur modifier en mode édition //
 function openModalstep1() {
-    const modalStep1 = document.querySelector(".container_modal-step1")
     modalStep1.classList.remove("display_none");
     manageWorks(); 
 
@@ -181,28 +183,22 @@ async function manageWorks() {
 
 // Cette fonction donne les instructions au click sur la croix de la modalStep1 //
 function closeModalStep1() {
-    const modalStep1 = document.querySelector(".container_modal-step1");
     modalStep1.classList.add("display_none");
 }
 
 // Cette fonction donne les instructions au click sur la croix de la modalStep2 //
 function closeModalStep2() {
-    const modalStep2 = document.querySelector(".container_modal-step2");
     modalStep2.classList.add("display_none");
 }
 
 // Cette fonction donne les instructions au click sur le bouton Ajouter une photo dans la modalStep1 //
 function openModalStep2() {
-    const modalStep1 = document.querySelector(".container_modal-step1");
-    const modalStep2 = document.querySelector(".container_modal-step2");
     modalStep1.classList.add("display_none");
     modalStep2.classList.remove("display_none");
 }
 
 // Cette fonction donne les instructions au click sur la flèche dans la modalStep2 //
 function returnModalStep1() {
-    const modalStep1 = document.querySelector(".container_modal-step1");
-    const modalStep2 = document.querySelector(".container_modal-step2");
     modalStep1.classList.remove("display_none");
     modalStep2.classList.add("display_none");
 } 
@@ -226,16 +222,12 @@ function addFileProject() {
 
 // Cette fonction récupère les données issues du formulaire de la modalStep2 //
 function manageFormModalStep2() {
-    const formulaire = document.getElementById("formAddProjects");
-    const submitButton = document.getElementById("submit_Project");
     const fieldsInput = document.querySelectorAll("#formAddProjects input");
     const fieldsSelect = document.querySelectorAll("#formAddProjects select");
-    const contentFile = document.querySelector(".content_file")
     formulaire.addEventListener("input", function() {
         let completedFields = true;
         fieldsInput.forEach(function(input) {
             if (input.id === "img_project" && input.value) {
-                let imgFileProject = document.querySelector(".img_file_project");
                 imgFileProject.src = URL.createObjectURL(input.files[0]);
                 contentFile.classList.add("display_none");
                 imgFileProject.classList.remove("display_none");
@@ -250,10 +242,10 @@ function manageFormModalStep2() {
             }
         });        
         if (completedFields) {
-            submitButton.removeAttribute("disabled");
-            submitButton.classList.remove("button_grey");
+            submitButtonmodalStep2.removeAttribute("disabled");
+            submitButtonmodalStep2.classList.remove("button_grey");
         } else {
-            submitButton.setAttribute("disabled", "true");
+            submitButtonmodalStep2.setAttribute("disabled", "true");
         }
     });
 };        
@@ -263,10 +255,6 @@ async function submitProject() {
     const imgProject = document.querySelector("#img_project");
     const titleProject = document.querySelector("#title-work");
     const categoryProject = document.querySelector("#category_work");
-    const form = document.querySelector("#formAddProjects");
-    const contentFile = document.querySelector(".content_file")
-    const submitButton = document.getElementById("submit_Project");
-    let imgFileProject = document.querySelector(".img_file_project");
     const worksToCreate =  {
         imgProject : imgProject.files[0],
         titleProject : titleProject.value,
@@ -275,11 +263,11 @@ async function submitProject() {
     await sendNewWork(worksToCreate);
     closeModalStep2();
     createProjects();
-    form.reset();
+    formulaire.reset();
     contentFile.classList.remove("display_none");
     imgFileProject.classList.add("display_none");
-    submitButton.setAttribute("disabled", "");
-    submitButton.classList.add("button_grey");
+    submitButtonmodalStep2.setAttribute("disabled", "");
+    submitButtonmodalStep2.classList.add("button_grey");
 }
 
 // Cette fonction permet de récupérer dynamiquement les catégories pour les intégrer à la liste déroulante dans le formulaire de la modalStep2 //
