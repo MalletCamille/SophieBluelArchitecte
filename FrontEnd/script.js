@@ -164,7 +164,6 @@ function openModalstep1() {
 
 // Cette fonction donne les instructions au click en dehors de la modale //
 function clickOutsideModal(event) {
-    console.log("jui bien passée dans la fonctiongue")
     if (event.target === modalStep1Container) {
         closeModalStep1();
     }
