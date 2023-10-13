@@ -4,8 +4,8 @@ let loginNav;
 const token = sessionStorage.getItem('token');
 let containerButtons;
 let submitButtonmodalStep2;
-let modalStep1;
-let modalStep2;
+let modalStep1Container;
+let modalStep2Container;
 let formulaire;
 let contentFile;
 let imgFileProject; 
@@ -57,11 +57,13 @@ function logout() {
 document.body.onload = async function () {
     containerButtons = document.querySelector(".buttons__container");
     loginNav = document.querySelector("#nav-login");
-    modalStep1 = document.querySelector(".container_modal-step1");
-    modalStep2 = document.querySelector(".container_modal-step2");
+    modalStep1Container = document.querySelector(".container_modal-step1");
+    modalStep2Container = document.querySelector(".container_modal-step2");
     formulaire = document.getElementById("formAddProjects");
     contentFile = document.querySelector(".content_file");
     imgFileProject = document.querySelector(".img_file_project");
+    backgroundModalstep1 = document.querySelector(".container_modal-step1")
+    backgroundModalstep2 = document.querySelector(".container_modal-step2")
     await getCategories();
     createProjects();
     createFilters();
@@ -88,6 +90,8 @@ document.body.onload = async function () {
         addImgButton.addEventListener("click", openModalStep2);
         arrowStep2.addEventListener("click", returnModalStep1);
         addFile.addEventListener("click", addFileProject);
+        backgroundModalstep1.addEventListener("click", clickOutsideModal);
+        backgroundModalstep2.addEventListener("click", clickOutsideModal);
         submitButtonmodalStep2.addEventListener("click", submitProject);
         integrationCategoryModalStep2();
         manageFormModalStep2();  
@@ -154,10 +158,20 @@ async function createProjectsCards(worksFiltered) {
 
 // Cette fonction donne les instructions au click sur modifier en mode édition //
 function openModalstep1() {
-    modalStep1.classList.remove("display_none");
+    modalStep1Container.classList.remove("display_none");
     manageWorks(); 
+} 
 
-}    
+// Cette fonction donne les instructions au click en dehors de la modale //
+function clickOutsideModal(event) {
+    console.log("jui bien passée dans la fonctiongue")
+    if (event.target === modalStep1Container) {
+        closeModalStep1();
+    }
+    if (event.target === modalStep2Container) {
+        closeModalStep2();
+    }
+}
 
 // Cette fonction récupère les images des projets dans le Back et les affiche en prévisualisation dans la modalStep1 //
 async function manageWorks() {
@@ -183,24 +197,24 @@ async function manageWorks() {
 
 // Cette fonction donne les instructions au click sur la croix de la modalStep1 //
 function closeModalStep1() {
-    modalStep1.classList.add("display_none");
+    modalStep1Container.classList.add("display_none");
 }
 
 // Cette fonction donne les instructions au click sur la croix de la modalStep2 //
 function closeModalStep2() {
-    modalStep2.classList.add("display_none");
+    modalStep2Container.classList.add("display_none");
 }
 
 // Cette fonction donne les instructions au click sur le bouton Ajouter une photo dans la modalStep1 //
 function openModalStep2() {
-    modalStep1.classList.add("display_none");
-    modalStep2.classList.remove("display_none");
+    modalStep1Container.classList.add("display_none");
+    modalStep2Container.classList.remove("display_none");
 }
 
 // Cette fonction donne les instructions au click sur la flèche dans la modalStep2 //
 function returnModalStep1() {
-    modalStep1.classList.remove("display_none");
-    modalStep2.classList.add("display_none");
+    modalStep1Container.classList.remove("display_none");
+    modalStep2Container.classList.add("display_none");
 } 
 
 // Cette fonction donne les instructions lorsqu'une corbeille est cliquée dans la modalStep1 //
