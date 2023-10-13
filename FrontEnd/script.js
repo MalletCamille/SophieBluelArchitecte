@@ -177,7 +177,7 @@ async function manageWorks() {
         containerImg.classList.add("container_imgstep1");
         trashCan.classList.add("trashcan", "fa-regular", "fa-trash-can");
         trashCan.addEventListener("click", trashcanClicked);
-        trashCan.setAttribute("workID", works[i].id);
+        trashCan.dataset.workId = works[i].id;
     }
 }
 
@@ -205,7 +205,7 @@ function returnModalStep1() {
 
 // Cette fonction donne les instructions lorsqu'une corbeille est cliquée dans la modalStep1 //
 async function trashcanClicked(event) {
-    const workId = event.target.getAttribute('workId');
+    const workId = event.target.dataset.workId;
     const galleryStep1 = document.querySelector(".modal-step1_gallery");
     await deleteWork(workId);
     // On supprime de l'affichage tous les projets //
