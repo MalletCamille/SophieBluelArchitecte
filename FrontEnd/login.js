@@ -35,7 +35,7 @@ async function postUsersLogin() {
 
  // Fonction Submit pour récupérer les informations de login et mdp saisies par l'utilisateur //
 document.body.onload = function () {
-    let loginForm = document.querySelector(".container__login form") // On sélectionne le container du formaulaire //  
+    let loginForm = document.querySelector(".container__login form") // On sélectionne le container du formulaire //  
     loginForm.addEventListener("submit", async function (event) {   // On écoute l'envoi du formulaire //  
         event.preventDefault ()  // On empêche le rafraichissement de la page par défaut à l'envoi d'un formulaire //
         postUsersLogin()   // On appelle la fonction postusersLogin qui permet l'envoi au Back du login et 

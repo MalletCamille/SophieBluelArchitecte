@@ -110,7 +110,7 @@ document.body.onload = async function () {
 
 // Cette fonction permet de créer les projets dynamiquement sur la page //
 async function createProjects() {
-    await getWorks(); // On appelle la fonction getWorks qui récupère le sprojets du Back //
+    await getWorks(); // On appelle la fonction getWorks qui récupère les projets du Back //
     createProjectsCards(works);  // Fonction qui gère l'affichage des works en fonction du filtre avec le paramètre works //
 }
 
