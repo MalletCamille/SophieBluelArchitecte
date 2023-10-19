@@ -7,7 +7,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Work+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -43,20 +43,19 @@
 					<span class="modal-step2_title">Ajout photo</span>
 					<form id="formAddProjects" action="#" method="post">
 						<div class="container_file">
-							<img class="img_file_project display_none" src="" alt="">
 							<div class="content_file">
 								<input type="file" id="img_project" name="img_project" accept="image/png, image/jpeg">
-								<label for="fileInput"></label>
+								<label for="img_project"></label>
 								<i class="file_icon fa-regular fa-image"></i>
 								<div class="button_file">+ Ajouter photo</div>
 								<span class="info_file">jpg, png : 4mo max</span>
 							</div>	
 						</div>
 						<div class="form_file">
-							<label class="label_style" for="title_work">Titre</label>
+							<label class="label_style" for="title-work">Titre</label>
 							<input class="input_style" type="text" id="title-work" name="title_work">
 							<label class="label_style" for="category_work">Catégorie</label>
-							<select class="select_style" type="text" id="category_work" name="category_work">
+							<select class="select_style" id="category_work" name="category_work">
 							</select>	
 						</div>
 					</form>	
@@ -131,6 +130,6 @@
 			</nav>
 		</footer>
 	</div>	
+	<script src="./script.js"></script>
 </body>
-<script src="./script.js"></script>
 </html>

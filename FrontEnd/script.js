@@ -8,7 +8,8 @@ let modalStep1Container; // on rend disponible la variable modalStep1Container s
 let modalStep2Container; // on rend disponible la variable modalStep2Container sur l'ensemble de la page script.js //
 let formulaire; // on rend disponible la variable formulaire sur l'ensemble de la page script.js //
 let contentFile; // on rend disponible la variable contenFile sur l'ensemble de la page script.js //
-let imgFileProject; // on rend disponible la variable imgFileprojects sur l'ensemble de la page script.js //
+//let imgFileProject; // on rend disponible la variable imgFileprojects sur l'ensemble de la page script.js //
+let containerImgProject; // on rend disponible la variable containerImgProject sur l'ensemble de la page script.js //
 
 // On récupère les projets depuis le Back-end //
 async function getWorks() {
@@ -62,7 +63,8 @@ document.body.onload = async function () {
     modalStep2Container = document.querySelector(".container_modal-step2"); // On sélectionne le container de la modalstep2 //
     formulaire = document.getElementById("formAddProjects"); // On sélectionne le formulaire de la modalstep2  //
     contentFile = document.querySelector(".content_file"); // On sélectionne le container de l'ajout de la photo //
-    imgFileProject = document.querySelector(".img_file_project"); // on sélectionne l'image qui a été importée //
+    //imgFileProject = document.querySelector(".img_file_project"); // on sélectionne l'image qui a été soumise par l'utilisateur //
+    containerImgProject = document.querySelector(".container_file"); // on sélectionne le container de l'image qui a été soumise par l'utilisateur //
     await getCategories(); // On appelle la fonction getCategories qui permet de récupérer les catégories du Back //
     createProjects(); // On appelle la fonction createProjects qui permet de créer dynamiquement les projets sur la page//
     createFilters(); // On appelle la fonction createfilters qui permet de créer dynamiquement les filtres par catégorie //
@@ -115,7 +117,7 @@ async function createProjects() {
 }
 
 // Cette fonction sert a créer les boutons filtres au chargement de la page index //
-async function createFilters () {
+    function createFilters () {
     let nbCategories = categories.length // On compte le nombre d'éléments dans le tableau categories //
     for (let i=0; i<nbCategories; i++) { 
         // On crée des boutons qui s'appuient sur les catégories que j'ai récupérées du Back-end //
@@ -150,7 +152,7 @@ async function createFilters () {
 }  
 
 // On affiche les projets en fonction du filtre qui a été cliqué avec le paramètre worksFiltered //
-async function createProjectsCards(worksFiltered) {
+    function createProjectsCards(worksFiltered) {
     const gallery = document.querySelector(".gallery"); // On sélectionne la galerie dans laquelle on va afficher les works //
     let nbProjects = worksFiltered.length // On compte le nombre d'éléments dans le tableau worksFiltered //
     gallery.innerHTML = ""; // On vide la galerie pour ne recréer que les works à afficher //
@@ -255,11 +257,17 @@ function manageFormModalStep2() {
     formulaire.addEventListener("input", function() { // On écoute la saisie de tous les champs input //
         let completedFields = true // Par défaut les champs sont remplis //
         fieldsInput.forEach(function(input) { // Pour chaque champs input//
-            if (input.id === "img_project" && input.value) { // On teste si le champs est le champs qui gère l'importation de l'image //
-                imgFileProject.src = URL.createObjectURL(input.files[0]); // On va attribuer au src de l'image preview l'url de l'image selectionnée //
-                contentFile.classList.add("display_none"); // On rend invisible le container "ajouter une photo" //
-                imgFileProject.classList.remove("display_none"); // On affiche en preview l'image qui a été ajoutée //
-            }    
+                if (input.id === "img_project" && input.value) { // On teste si le champs est le champs qui gère l'importation de l'image //
+                    if (!document.querySelector(".img_file_project")) {
+                        let imgFileProject = document.createElement("img"); // on crée un élément image // 
+                        containerImgProject.appendChild(imgFileProject); // l'image sera enfant du container de l'image //
+                        imgFileProject.setAttribute("src", URL.createObjectURL(input.files[0]));
+                        imgFileProject.classList.add("img_file_project"); // on attribue le style à l'image de preview" 
+                        // On va attribuer au src de l'image preview l'url de l'image selectionnée //
+                        imgFileProject.setAttribute("alt", "image preview du projet"); // On détermine le alt à attibuer à l'image de preview //
+                        contentFile.classList.add("display_none"); // On rend invisible le container "ajouter une photo" //
+                    }    
+                }        
             if (input.value.trim() ==="") { // trim permet de supprimer les espaces au début et à la fin de chaînes de caractères //
             // Cela permet donc de ne pas considérer comme rempli un champs dans lequel on aura mis qu'un seul espace par exemple //   
                 completedFields = false; // Dans le cas où les champs sont vides alors la condition est fausse // 
@@ -302,7 +310,7 @@ async function submitProject() {
 }
 
 // Cette fonction permet de récupérer dynamiquement les catégories pour les intégrer à la liste déroulante dans le formulaire de la modalStep2 //
-async function integrationCategoryModalStep2 () {
+    function integrationCategoryModalStep2 () {
     const selectCategory = document.querySelector("#category_work"); // On sélectionne la liste déroulante dans la modalstep2 //
     let nbCategories = categories.length // On compte le nombre de catégories //
     for (let i=0; i<nbCategories; i++) {  // On crée une boucle for pour chaque catégorie //
